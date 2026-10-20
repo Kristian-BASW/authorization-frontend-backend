@@ -8,7 +8,7 @@ All file paths below are relative to `client/`. Apply all five sections before r
 
 | File | Action | Purpose |
 | --- | --- | --- |
-| `src/models/login-request.ts` | Check the existing file | Type the credentials sent to the API |
+| `src/models/login-request.ts` | Create or update | Type the credentials sent to the API |
 | `src/models/login-response.ts` | Create | Type the API's login response |
 | `src/auth/AuthProvider.tsx` | Create | Handle login, logout, token state, and storage |
 | `src/App.tsx` | Replace | Display the login form and login status |
@@ -20,7 +20,7 @@ The flow is: form → `useAuth().login(request)` → `POST /login` → token in 
 
 **File: `src/models/login-request.ts`**
 
-This file already exists. Check that it contains the following fields; you do not need a second request model.
+Create the `models` folder and this file if they do not exist. If the file already exists, update it to contain the following fields.
 
 ```tsx
 export interface LoginRequest {
@@ -45,7 +45,7 @@ export interface LoginResponse {
 
 **File: `src/auth/AuthProvider.tsx`**
 
-Create the `auth` folder and this file. The provider handles the HTTP request, stores the token, and exposes login state through React Context. `useAuth` gives components access to that context. The initial state reads from `sessionStorage` so that reloading the same tab preserves login status.
+Create the `auth` folder and this file. The provider handles the HTTP request, stores the token, and exposes login state through React Context. `useAuth` gives components access to that context. The initial state reads from `sessionStorage`
 
 ```tsx
 import {
@@ -274,7 +274,16 @@ bun run build
 bunx tsc --noEmit
 ```
 
-Changes to the client require another Docker build when using Compose. Alternatively, keep the API running and use `bun run dev` from `client/` for local development at `http://localhost:3000`.
+Changes to the client require another Docker build when using Compose. Docker installs the client dependencies during the build.
+
+For local development, install Bun, keep the API running, and run these commands from `client/`:
+
+```sh
+bun install
+bun run dev
+```
+
+The local frontend runs at `http://localhost:3000`.
 
 ## How the pieces fit together
 
