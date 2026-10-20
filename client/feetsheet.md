@@ -285,9 +285,3 @@ Changes to the client require another Docker build when using Compose. Alternati
 - `logout` clears the stored token and the state. It does not revoke the JWT on the server.
 - A stored token preserves the interface's login status. The backend must still validate the token on protected requests, including its expiry. Handling expired tokens is part of the extra exercise in the main README.
 
-## Verification of this example
-
-The code above passed TypeScript checking and a production build. It was also tested in Chrome against the existing backend: incorrect credentials, network failure, successful login, token storage, reload, and logout. The stored token successfully authorized a request to `GET /api/Users`.
-
-Testing used a temporary copy of the client. The implementation is included here as reference code; it has not been added to the client's source files.
-
